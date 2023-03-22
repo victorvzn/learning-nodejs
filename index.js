@@ -1,4 +1,6 @@
 const express = require('express')
+const { faker } = require('@faker-js/faker')
+
 const app = express()
 
 const PORT = 3000
@@ -8,20 +10,20 @@ app.get('/', (req, res) => {
 })
 
 app.get('/products', (req, res) => {
-  const { limit, offset } = req.query
+  const { size } = req.query
+  const limit = size || 10
 
-  if (limit && offset) {
-    res.json({
-      limit,
-      offset
-    })
-  } else {
-    res.json({
-      message: 'No hay parámetros'
+  const products = []
+
+  for (let index = 0; index < limit; index++) {
+    products.push({
+      name: faker.commerce.productName(),
+      price: Number(faker.commerce.price()),
+      image: faker.image.imageUrl()
     })
   }
 
-  res.json([])
+  res.json(products)
 })
 
 app.get('/products/:id', (req, res) => {
