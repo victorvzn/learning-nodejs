@@ -1,1 +1,12 @@
-console.log('My store')
+const express = require('express')
+const app = express()
+
+const PORT = 3000
+
+app.get('/', (req, res) => {
+  res.send('Hello from Express.js')
+})
+
+app.listen(PORT, () => {
+  console.log(`Listening on http://localhost:${PORT}`)
+})
