@@ -6,7 +6,7 @@ const { logErrors, errorHandler, boomErrorHandler } = require('./middlewares/err
 
 const app = express()
 
-const PORT = 3000
+const PORT = process.env.PORT || 3000
 
 app.use(express.json())
 
@@ -14,22 +14,21 @@ const whiteList = ['http://localhost:8080']
 
 const options = {
   origin: (origin, callback) => {
-    console.log({ origin })
-    if (whiteList.includes(origin)) {
+    if (whiteList.includes(origin) || !origin) {
       callback(null, true)
     } else {
-      callback(new Error('Not allowed'))
+      callback(new Error('no permitido'))
     }
   }
 }
+
+app.use(cors(options))
 
 app.get('/api', (req, res) => {
   res.send('Hello from Express.js')
 })
 
 routerApi(app)
-
-app.use(cors(options))
 
 // Custom middlewares
 app.use(logErrors)
