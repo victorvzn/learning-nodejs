@@ -31,7 +31,11 @@ class ProductService {
   }
 
   find () {
-    return this.products
+    return new Promise((resolve, reject) => {
+      setTimeout(() => {
+        resolve(this.products)
+      }, 3000)
+    })
   }
 
   findOne (id) {
