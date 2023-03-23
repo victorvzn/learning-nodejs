@@ -32,7 +32,7 @@ router.post('/', async (req, res) => {
   res.status(201).json(newProduct)
 })
 
-router.patch('/:id', async (req, res) => {
+router.patch('/:id', async (req, res, nexy) => {
   try {
     const { id } = req.params
     const body = req.body
