@@ -14,6 +14,7 @@ const whiteList = ['http://localhost:8080']
 
 const options = {
   origin: (origin, callback) => {
+    console.log({ origin })
     if (whiteList.includes(origin)) {
       callback(null, true)
     } else {
