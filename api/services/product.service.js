@@ -7,6 +7,7 @@ class ProductService {
   constructor () {
     this.products = []
     this.generate()
+
     this.pool = pool
     this.pool.on('error', (err) => console.log(err))
   }
@@ -36,8 +37,10 @@ class ProductService {
   }
 
   async find () {
-    const query = 'SELECT * FROM products'
+    const query = 'SELECT * FROM tasks'
+
     const res = await this.pool.query(query)
+
     return res.rows
   }
 
