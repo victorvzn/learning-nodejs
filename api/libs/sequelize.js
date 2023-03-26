@@ -6,15 +6,18 @@ const setupModels = require('../db/models')
 const USER = config.dbUser
 const PASSWORD = config.dbPassword
 
-const URI = `postgresql://${USER}:${PASSWORD}@${config.dbHost}:${config.dbPort}/${config.dbName}`
+const driver = 'mysql' // postgres
+
+const URI = `${driver}://${USER}:${PASSWORD}@${config.dbHost}:${config.dbPort}/${config.dbName}`
 
 const sequelize = new Sequelize(URI, {
-  dialect: 'postgres',
+  dialect: driver,
   logging: true
 })
 
 setupModels(sequelize)
 
+// sequelize.sync({ force: true })
 sequelize.sync()
 
 module.exports = sequelize
