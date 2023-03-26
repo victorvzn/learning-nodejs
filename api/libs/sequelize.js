@@ -6,12 +6,12 @@ const setupModels = require('../db/models')
 const USER = config.dbUser
 const PASSWORD = config.dbPassword
 
-const driver = 'mysql' // postgres
+const DRIVER = 'postgres' // mysql
 
-const URI = `${driver}://${USER}:${PASSWORD}@${config.dbHost}:${config.dbPort}/${config.dbName}`
+const URI = `${DRIVER}://${USER}:${PASSWORD}@${config.dbHost}:${config.dbPort}/${config.dbName}`
 
 const sequelize = new Sequelize(URI, {
-  dialect: driver,
+  dialect: DRIVER,
   logging: true
 })
 
