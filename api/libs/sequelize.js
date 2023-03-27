@@ -12,7 +12,7 @@ const URI = `${DRIVER}://${USER}:${PASSWORD}@${config.dbHost}:${config.dbPort}/$
 
 const sequelize = new Sequelize(URI, {
   dialect: DRIVER,
-  logging: true
+  logging: console.log
 })
 
 setupModels(sequelize)

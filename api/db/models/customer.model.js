@@ -36,7 +36,7 @@ const CustomerSchema = {
     type: DataTypes.INTEGER,
     references: {
       model: USER_TABLE,
-      KEY: 'id'
+      key: 'id'
     },
     onUpdate: 'CASCADE', // ??
     onDelete: 'SET NULL' // ??
@@ -46,7 +46,7 @@ const CustomerSchema = {
 class Customer extends Model {
   static associate (models) {
     // Relacion del lado de customer
-    this.belongsTo(models.User, { as: 'user' })
+    this.belongsTo(models.User, { foreignKey: 'userId' })
   }
 
   static config (sequelize) {

@@ -10,21 +10,19 @@ class CustomerService {
   }
 
   async findOne (id) {
-    const user = await models.Customer.findByPk(id)
+    const customer = await models.Customer.findByPk(id)
 
-    if (!user) {
-      throw boom.notFound('user not found')
+    if (!customer) {
+      throw boom.notFound('customer not found')
     }
 
-    return user
+    return customer
   }
 
   async create (data) {
-    // const newUser = await models.Customer.create(data)
+    const newCustomer = await models.Customer.create(data)
 
-    // return newUser
-
-    return data
+    return newCustomer
   }
 
   async update (id, changes) {
@@ -36,9 +34,9 @@ class CustomerService {
   }
 
   async delete (id) {
-    const user = await this.findOne(id)
+    const customer = await this.findOne(id)
 
-    await user.destroy()
+    await customer.destroy()
 
     return { ok: true }
   }
