@@ -1,6 +1,7 @@
 const express = require('express')
 const cors = require('cors')
 const routerApi = require('./routes')
+const { checkApiKey } = require('./middlewares/auth.handler')
 
 const { logErrors, errorHandler, boomErrorHandler, ormErrorHandler } = require('./middlewares/error.handler')
 
@@ -26,6 +27,10 @@ app.use(cors(options))
 
 app.get('/api', (req, res) => {
   res.send('Hello from Express.js')
+})
+
+app.get('/api/private', checkApiKey, (req, res) => {
+  res.send('Private route')
 })
 
 routerApi(app)
