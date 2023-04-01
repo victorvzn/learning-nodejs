@@ -12,11 +12,14 @@ router.get(
   async (req, res, next) => {
     try {
       const user = req.user
+      const jwtConfig = {
+        expiresIn: '1h'
+      }
       const payload = {
         sub: user.id,
         role: user.role
       }
-      const token = jwt.sign(payload, config.jwtSecret)
+      const token = jwt.sign(payload, config.jwtSecret, jwtConfig)
       res.json({
         user,
         token
