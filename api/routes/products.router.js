@@ -3,6 +3,7 @@ const express = require('express')
 const ProductService = require('../services/product.service')
 const validatorHandler = require('../middlewares/validator.handler')
 const { createProductSchema, updateProductSchema, getProductSchema, queryProductSchema } = require('../schemas/product.schema')
+const passport = require('passport')
 
 const router = express.Router()
 const service = new ProductService()
@@ -37,6 +38,7 @@ router.get(
 
 router.post(
   '/',
+  passport.authenticate('jwt', { session: false }),
   validatorHandler(createProductSchema, 'body'),
   async (req, res, next) => {
     try {
@@ -52,6 +54,7 @@ router.post(
 
 router.patch(
   '/:id',
+  passport.authenticate('jwt', { session: false }),
   validatorHandler(getProductSchema, 'params'),
   validatorHandler(updateProductSchema, 'body'),
   async (req, res, next) => {
@@ -70,6 +73,7 @@ router.patch(
 
 router.delete(
   '/:id',
+  passport.authenticate('jwt', { session: false }),
   validatorHandler(getProductSchema, 'params'),
   async (req, res) => {
     const { id } = req.params
